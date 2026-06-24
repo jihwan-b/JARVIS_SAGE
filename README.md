@@ -221,12 +221,12 @@ python vla/smolvla_wrapper.py --checkpoint <smolvla_ckpt> --task JarvisMultiTool
 
 ## Future work
 
-- **Real-world transfer** — sim-to-real on the NVIDIA lightbox (vision domain is the narrow case where transfer is most plausible). Early real-arm + 3D-printed-toolbox handover below.
+- **Real-world transfer** — sim-to-real on the NVIDIA lightbox (the vision domain is the narrow case where transfer is most plausible). The real SO-101 in the lightbox is shown below.
 - **Domain randomization via NVIDIA Cosmos Transfer 2.5** — photorealistic augmentation to widen the visual training distribution.
 
 <div align="center">
-<img src="assets/handover_future.gif" width="70%" alt="Real tool handover prototype"/>
-<br><sub>Real SO-101 + 3D-printed toolbox — tool handover prototype.</sub>
+<img src="assets/real_world_arm.gif" width="60%" alt="Real SO-101 in the lightbox environment"/>
+<br><sub>The real SO-101 (3D-printed) in the green lightbox — the same environment used in simulation.</sub>
 </div>
 
 ---
