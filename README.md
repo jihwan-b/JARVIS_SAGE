@@ -174,6 +174,7 @@ JARVIS/
 │   └── smolvla_wrapper.py
 ├── eval/                # trajectory diversity (signature kernel + Vendi score)
 │   └── diversity_analysis.py
+├── sage_sim2real/       # archived SAGE attempt: sim-to-real actuator-gap compensator (see below)
 ├── docs/                # setup, architecture, positioning
 └── assets/              # figures + demo clips
 ```
@@ -228,6 +229,16 @@ python vla/smolvla_wrapper.py --checkpoint <smolvla_ckpt> --task JarvisMultiTool
 <img src="assets/real_world_arm.gif" width="60%" alt="Real SO-101 in the lightbox environment"/>
 <br><sub>The real SO-101 (3D-printed) in the green lightbox — the same environment used in simulation.</sub>
 </div>
+
+---
+
+## SAGE — sim-to-real actuator-gap compensator
+
+ A low-cost SO-101 servo arm doesn't land exactly where a policy commands it — static bias, direction-dependent backlash, tracking lag. So we tried the concept behind NVIDIA's unreleased **SAGE + GapONet + GR00T** integration: measure that sim↔real gap with SAGE, learn a small **residual compensator** that pre-corrects each command, and splice it into the GR00T deploy loop as an action-space wrapper — without touching the GR00T model.
+
+We built the offline pipeline — SAGE CSV → unit/rate harmonization → residual MLP → TorchScript export — and trained it on real SO-101 data we collected. On a chronological held-out split it cut per-joint tracking RMSE by ~**56–67%** (e.g. `shoulder_lift` 3.9° → 1.3°). This stayed offline; we didn't wire it into the live deploy loop, so it wasn't run on the arm in the loop.
+
+Contents of [`sage_sim2real/`](sage_sim2real/): `tools/` (feature spec + converter + trainer), `runs/` (models + reports on real data), `data/output_bong/` (the collected SAGE data)
 
 ---
 

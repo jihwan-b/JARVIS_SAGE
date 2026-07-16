@@ -1,0 +1,83 @@
+{
+  "val_mse_best": 0.032534901052713394,
+  "rmse_before": {
+    "shoulder_pan": 1.6647664308547974,
+    "shoulder_lift": 3.8044917583465576,
+    "elbow_flex": 3.4058051109313965,
+    "wrist_flex": 1.4260894060134888,
+    "wrist_roll": 0.9914719462394714,
+    "gripper": 1.6379177570343018
+  },
+  "rmse_after": {
+    "shoulder_pan": 0.12996651232242584,
+    "shoulder_lift": 0.26787570118904114,
+    "elbow_flex": 0.2338460087776184,
+    "wrist_flex": 0.0985506996512413,
+    "wrist_roll": 0.11625839024782181,
+    "gripper": 0.16925784945487976
+  },
+  "feature_dim": 24,
+  "hidden": [
+    128,
+    128
+  ],
+  "dataset_meta": {
+    "feature_dim": 24,
+    "target_dim": 6,
+    "deploy_joint_order": [
+      "shoulder_pan",
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex",
+      "wrist_roll",
+      "gripper"
+    ],
+    "sage_joint_order": [
+      "Rotation",
+      "Pitch",
+      "Elbow",
+      "Wrist_Pitch",
+      "Wrist_Roll",
+      "Jaw"
+    ],
+    "feature_blocks": [
+      [
+        "a",
+        6
+      ],
+      [
+        "prev",
+        6
+      ],
+      [
+        "delta",
+        6
+      ],
+      [
+        "dir",
+        6
+      ]
+    ],
+    "units": "lerobot .pos (arm degrees, gripper 0..100)",
+    "feature_side": "command-only (no realized measured state; leakage-free)",
+    "target_rate_hz": 30.0,
+    "side": "real",
+    "motions": [
+      "pick_place",
+      "oscillation_low_freq",
+      "random_waypoints",
+      "actuator_bandwidth",
+      "backlash_detection"
+    ],
+    "per_motion_samples": {
+      "pick_place": 2914,
+      "oscillation_low_freq": 3312,
+      "random_waypoints": 1246,
+      "actuator_bandwidth": 3613,
+      "backlash_detection": 3613
+    },
+    "n_train": 11758,
+    "n_val": 2940,
+    "residual_target": "g = real_actual - command; deploy applies u = a_desired - g_hat"
+  }
+}
